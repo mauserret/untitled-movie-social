@@ -14,9 +14,9 @@ class Movie(models.Model):
     original_language = models.CharField(max_length=10, blank=True)
     overview = models.TextField(blank=True)
     release_date = models.DateField(null=True, blank=True, db_index=True) # index to search
-    runtime_minutes = models.PositiveSmallIntegerField(null=True, blank=True)
-    poster_path = models.CharField(max_length=255, default="", blank=True)
-    backdrop_path = models.CharField(max_length=255, default="", blank=True)
+    runtime_minutes = models.PositiveSmallIntegerField(default=None, null=True, blank=True)
+    poster_path = models.CharField(max_length=255, default=None, blank=True)
+    backdrop_path = models.CharField(max_length=255, default=None, blank=True)
     tmdb_synced_at = models.DateTimeField(null=True, blank=True, db_index=True) # TMDB limits cache up to 6 months
     genres = models.ManyToManyField(Genre, related_name="movies", blank=True) # m2m: a movie has different genres and a genre has different movies
 
@@ -26,7 +26,7 @@ class Movie(models.Model):
 class Person(models.Model):
     tmdb_id = models.PositiveIntegerField(unique=True)
     name = models.CharField(max_length=255, db_index=True) # index to search
-    profile_path = models.CharField(max_length=255, null=True, blank=True) # Photo
+    profile_path = models.CharField(max_length=255, default=None, blank=True) # Photo
     tmdb_synced_at = models.DateTimeField(null=True, blank=True)
 
     def __str__(self):
