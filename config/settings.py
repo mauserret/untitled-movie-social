@@ -20,6 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # load the .env variables to setup postgre
 load_dotenv(BASE_DIR / ".env") 
+TMDB_TOKEN = os.environ["API_Read_Access_Token"]
 
 
 # Quick-start development settings - unsuitable for production
