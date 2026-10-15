@@ -15,8 +15,8 @@ class Movie(models.Model):
     overview = models.TextField(blank=True)
     release_date = models.DateField(null=True, blank=True, db_index=True) # index to search
     runtime_minutes = models.PositiveSmallIntegerField(default=None, null=True, blank=True)
-    poster_path = models.CharField(max_length=255, default=None, blank=True)
-    backdrop_path = models.CharField(max_length=255, default=None, blank=True)
+    poster_path = models.CharField(max_length=255, default="", blank=True)
+    backdrop_path = models.CharField(max_length=255, default="", blank=True)
     tmdb_synced_at = models.DateTimeField(null=True, blank=True, db_index=True) # TMDB limits cache up to 6 months
     genres = models.ManyToManyField(Genre, related_name="movies", blank=True) # m2m: a movie has different genres and a genre has different movies
 
