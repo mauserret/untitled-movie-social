@@ -26,7 +26,7 @@ def _upsert_credits(movie, credits):
         people[c["id"]] = Person(
             tmdb_id=c["id"],
             name=c["name"],
-            profile_path=c.get("profile_path"),
+            profile_path=c.get("profile_path") or "",
         )
 
     Person.objects.bulk_create(

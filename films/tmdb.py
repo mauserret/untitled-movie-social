@@ -40,10 +40,11 @@ class TMDBClient:
 
     @staticmethod
     def _sleep(attempt, retry_after=None):
+        delay = 2 ** attempt + random.random()
         try:
-            delay = float(retry_after) #TMDB tells how much to wait
+            delay = max(delay, float(retry_after))
         except (TypeError, ValueError):
-            delay = 2 ** attempt + random.random() 
+            pass
         time.sleep(delay)
 
     def get_movie(self, tmdb_id):
@@ -54,3 +55,6 @@ class TMDBClient:
 
     def get_genres(self):
         return self._get("/genre/movie/list", params={"language": "en-US"})
+
+    def get_popular(self, page):
+        return self._get("/movie/popular", params={"language": "en-US", "page": page})
